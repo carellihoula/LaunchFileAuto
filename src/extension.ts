@@ -13,6 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
   ) {
     const urlParams = new URLSearchParams(window.location.search);
     filePath = urlParams.get("file");
+    console.log(`File path from URL: ${filePath}`);
   }
 
   // Si aucun paramètre trouvé dans l'URL, tenter de lire process.argv (en environnement Node)
