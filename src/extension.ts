@@ -3,10 +3,27 @@ import * as vscode from "vscode";
 export function activate(context: vscode.ExtensionContext) {
   console.log('Extension "auto-open-file" activated.');
 
-  // Rechercher automatiquement le paramètre "--file=..."
-  const fileArg = process.argv.find((arg) => arg.startsWith("--file="));
-  if (fileArg) {
-    const filePath = fileArg.substring("--file=".length);
+  let filePath: string | null = null;
+
+  // Vérifier si nous sommes dans un environnement web (Code‑Server)
+  if (
+    typeof window !== "undefined" &&
+    window.location &&
+    window.location.search
+  ) {
+    const urlParams = new URLSearchParams(window.location.search);
+    filePath = urlParams.get("file");
+  }
+
+  // Si aucun paramètre trouvé dans l'URL, tenter de lire process.argv (en environnement Node)
+  if (!filePath) {
+    const fileArg = process.argv.find((arg) => arg.startsWith("--file="));
+    if (fileArg) {
+      filePath = fileArg.substring("--file=".length);
+    }
+  }
+
+  if (filePath) {
     const fileUri = vscode.Uri.file(filePath);
     vscode.workspace.openTextDocument(fileUri).then(
       (doc) => {
@@ -19,10 +36,10 @@ export function activate(context: vscode.ExtensionContext) {
       }
     );
   } else {
-    console.log("No file parameter provided in process.argv.");
+    console.log("No file parameter found.");
   }
 }
 
 export function deactivate() {
-  // Nothing required on deactivation
+  // Rien à faire à la désactivation
 }
