@@ -3,33 +3,14 @@ import * as vscode from "vscode";
 export function activate(context: vscode.ExtensionContext) {
   console.log('Extension "auto-open-file" activated.');
 
-  let filePath: string | null = null;
-
-  // Vérifier si nous sommes dans un environnement web (Code‑Server)
-  if (
-    typeof window !== "undefined" &&
-    window.location &&
-    window.location.search
-  ) {
-    const urlParams = new URLSearchParams(window.location.search);
-    filePath = urlParams.get("file");
-    console.log(`File path from URL: ${filePath}`);
-  }
-
-  // Si aucun paramètre trouvé dans l'URL, tenter de lire process.argv (en environnement Node)
-  if (!filePath) {
-    const fileArg = process.argv.find((arg) => arg.startsWith("--file="));
-    if (fileArg) {
-      filePath = fileArg.substring("--file=".length);
-    }
-  }
-
+  // Récupérer le chemin du fichier depuis la variable d'environnement FILE
+  const filePath = process.env.FILE;
   if (filePath) {
     const fileUri = vscode.Uri.file(filePath);
     vscode.workspace.openTextDocument(fileUri).then(
       (doc) => {
         vscode.window.showTextDocument(doc);
-        console.log(`Opened file: ${filePath}`);
+        console.log(`Opened file from environment: ${filePath}`);
       },
       (err) => {
         vscode.window.showErrorMessage(`Failed to open file: ${filePath}`);
@@ -37,7 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
       }
     );
   } else {
-    console.log("No file parameter found.");
+    console.log("No file parameter found in environment variable FILE.");
   }
 }
 
