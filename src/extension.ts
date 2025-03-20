@@ -3,7 +3,7 @@ import WebSocket from "ws";
 
 let ws: WebSocket | null;
 let reconnectAttempts = 0;
-const maxReconnectAttempts = 15;
+const maxReconnectAttempts = 30;
 const reconnectInterval = 5000;
 
 export function activate(context: vscode.ExtensionContext) {
@@ -19,12 +19,11 @@ export function activate(context: vscode.ExtensionContext) {
       reconnectAttempts = 0; // Reset reconnection attempts on successful connection
 
       // Subscribe to the 'open_file' topic
-      // logic not yet implemented on server side
-      /*const subscribeMessage = JSON.stringify({
+      const subscribeMessage = JSON.stringify({
         action: "subscribe",
         topic: "open_file",
       });
-      ws?.send(subscribeMessage);*/
+      ws?.send(subscribeMessage);
     });
 
     ws.on("message", (data: WebSocket.Data) => {
