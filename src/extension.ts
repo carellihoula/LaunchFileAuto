@@ -57,7 +57,7 @@ export function activate(context: vscode.ExtensionContext) {
         setTimeout(connect, reconnectInterval);
       } else {
         console.error(
-          "Maximum reconnection attempts reached. No further attempts will be made."
+          "Maximum reconnection attempts reached. Refreshing the editor."
         );
       }
     });
