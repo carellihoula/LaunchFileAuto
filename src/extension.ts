@@ -3,7 +3,7 @@ import WebSocket from "ws";
 
 let ws: WebSocket | null;
 let reconnectAttempts = 0;
-const maxReconnectAttempts = 10;
+const maxReconnectAttempts = 15;
 const reconnectInterval = 5000;
 
 export function activate(context: vscode.ExtensionContext) {
