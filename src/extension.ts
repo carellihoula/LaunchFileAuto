@@ -7,6 +7,9 @@ const maxReconnectAttempts = 15;
 const reconnectInterval = 5000;
 
 export function activate(context: vscode.ExtensionContext) {
+  // To close SideBar automatically when extension is activated => opened-folder not necessary
+  vscode.commands.executeCommand("workbench.action.closeSidebar");
+
   // Function to establish a WebSocket connection
   const connect = () => {
     ws = new WebSocket("ws://127.0.0.1:8000/ws");
