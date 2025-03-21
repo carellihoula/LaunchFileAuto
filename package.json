@@ -3,7 +3,7 @@
   "displayName": "LaunchFileAuto",
   "description": "LaunchFileAuto on code server",
   "publisher": "carelLihoulaNtsoumou",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "engines": {
     "vscode": "^1.97.2"
   },
