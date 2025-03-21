@@ -33,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
         const jsonData = JSON.parse(message);
         if (jsonData.topic === "open_file") {
           const filePath = jsonData.message;
-          vscode.window.showInformationMessage(`Opened file: ${filePath}`);
+          // vscode.window.showInformationMessage(`Opened file: ${filePath}`);
           vscode.workspace.openTextDocument(filePath).then((doc) => {
             vscode.window.showTextDocument(doc);
           });
