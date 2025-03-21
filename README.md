@@ -39,7 +39,13 @@ npm install
 To create the VSIX package for your extension, run:
 
 ```bash
-vsce package
+vsce package --out your-extension.vsix
+```
+
+#### For Example :
+
+```bash
+vsce package --out launchfileauto-latest.vsix
 ```
 
 If you need to prepare your extension for pre-publishing, run:
