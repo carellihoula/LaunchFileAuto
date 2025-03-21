@@ -1,6 +1,6 @@
 # LaunchFileAuto Extension
 
-This extension allows you to automatically open a file based on a clicked node in the interface. This document details the steps to create, install, and package the extension.
+This extension allows you to automatically open a file based on a clicked node in the interface. This document details the steps to create, install, and package the extension...
 
 ## Prerequisites
 
